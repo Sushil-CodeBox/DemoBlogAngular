@@ -1,0 +1,52 @@
+.registration-container {
+    background-image: url('../../assets/image/bgRegister.jpg'); /* Replace with the actual path to your background image */
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .registration-content {
+    width: 500px;   
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .registration-content h3 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 30px;
+  }
+  
+  .registration-content .form-group label {
+    font-weight: bold;
+    color: #555555;
+    margin-top: 8px;
+  }
+  
+  .registration-content .form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    color: #555555;
+  }
+  
+  .registration-content .form-control:focus {
+    border-color: #80bdff;
+    box-shadow: none;
+  }
+  
+  .registration-content .btn-primary {
+    margin-top: 20px;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .registration-content .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  

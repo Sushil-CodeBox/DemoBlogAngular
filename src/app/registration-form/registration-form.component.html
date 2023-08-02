@@ -1,0 +1,26 @@
+<div class="registration-container">
+    <div class="registration-content">
+      <h3>User Registration</h3>
+      <form>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" placeholder="Enter username" name="Username" [(ngModel)]="RegisterViewModel1.Username">
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email" name="Email" [(ngModel)]="RegisterViewModel1.Email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Password" name="Passowrd"  [(ngModel)]="RegisterViewModel1.Password">
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" (click)="onRegisterClick($event)">Register</button>
+        <button type="submit" routerLink="/login" class="btn btn-primary btn-block">Log In</button>
+      </form>
+    </div>
+  </div>
+  

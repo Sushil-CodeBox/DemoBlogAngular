@@ -1,0 +1,39 @@
+
+<nav class="navbar navbar-expand navbar-dark bg-primary">
+  <div class="container-fluid text-white">
+    <a class="navbar-brand text-white" href="#"> WEE Blog </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse text-white" id="mynav">
+      <ul class="navbar-nav mr-auto">
+        <!-- <li class="nav-item" *ngIf="loginService.currentUser == null">
+          <a class="nav-link" routerLink="login">Login</a>
+        </li> -->
+        <li class="nav-item" *ngIf="loginService.currentUser != null">
+          <a class="nav-link" [routerLink]="['/viewpost']">Dashboard</a>
+        </li>
+        
+        <li class="nav-item" *ngIf="loginService.currentUser == null">
+          <a class="nav-link">Profile</a>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="loginService.currentUser != null">
+      <label class="form-label text-white">User Name : {{loginService.currentUser}}</label>
+    </div>
+
+    <div class="col-md-3 text-end" *ngIf="loginService.currentUser == null">
+      <button type="button" class="btn btn-primary me-2" routerLink="login">Login</button>
+      <button type="button" class="btn btn-primary" [routerLink]=" [ '/register' ] ">Sign-up</button>
+    </div>
+    <div *ngIf="loginService.currentUser != null">
+      <button type="button" style="margin-left: 15px;" (click)="loginService.Logout()" class="btn btn-primary me-2">Logout</button>
+    </div>
+
+  </div>
+</nav>
+<div class="container-fluid">
+  <!-- This will help to route the URL -->
+  <router-outlet></router-outlet>
+</div>
