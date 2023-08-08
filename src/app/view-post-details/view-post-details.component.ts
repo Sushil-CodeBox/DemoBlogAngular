@@ -3,6 +3,8 @@ import { BlogPostServiceService } from '../blog-post-service.service';
 import { Post } from '../post';
 import { Comment } from '../comment';
 import { LoginService } from '../login.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
@@ -13,7 +15,7 @@ import { LoginService } from '../login.service';
 export class ViewPostDetailsComponent {
   imageFile: File | undefined;
 
-  constructor(private blogPostService: BlogPostServiceService, public loginservice: LoginService) { }
+  constructor(private blogPostService: BlogPostServiceService, public loginservice: LoginService,private toastr: ToastrService) { }
 
   post = { title: '', description: '', image: '' }
   CommentText: string = '';
@@ -22,7 +24,7 @@ export class ViewPostDetailsComponent {
   postdata: Post[] = [];
 
   postrefid: any = '';
-  toggleStates: boolean[] = [];
+  toggleStates: boolean[] =[];
 
   Designation: string = "";
   Username: string = "";
@@ -40,12 +42,18 @@ export class ViewPostDetailsComponent {
   Years: number[] = [];
   TeamMembersSummary: any = [];
   TeamMembers: any = [];
+  previousIndex:any=null;
 
+  p:number = 1;
 
   //Excecuting toggleDiv fuction from HTML pages
   toggleDiv(index: number) {
-    
+    if(this.toggleStates[this.previousIndex]!=this.toggleStates[index])
+    {
+      this.toggleStates[this.previousIndex]=false;
+    }
     this.toggleStates[index] = !this.toggleStates[index]; // this is to hide and show commnet div
+    this.previousIndex=index;
     this.currentPostId = this.postdata[index].id; //This is to get current postid of the post. 
   }
 
@@ -55,7 +63,10 @@ export class ViewPostDetailsComponent {
     //here we are filltering post data on post id to get its related comments.
     const selectedPost: any = this.postdata.find(post => post.id === this.currentPostId);
     //const s= selectedPost ? selectedPost.comments : undefined;
-    return selectedPost ? selectedPost.comments : undefined;
+    // Sort the comments by id in descending order
+    const sortedComments = selectedPost.comments.sort((a:any,b:any)=>b-a);
+    console.log(sortedComments);
+    return sortedComments ? sortedComments : undefined;
   }
   
   
@@ -90,17 +101,16 @@ export class ViewPostDetailsComponent {
         console.log(result);
         this.postdata = result;
         // this.imagePaths=result.image; 
+        //this.toastr.success("Data loaded successfully");
         return result;
       },
       (error: any) => {
         console.log(error);
-        alert("Authentication Fails..!");
+        this.toastr.error("Authentication Fails..!");
       }
     )
+
   }
-
-
-
 
   onFileSelected(event: any): void {
     
@@ -110,19 +120,21 @@ export class ViewPostDetailsComponent {
       this.blogPostService.ImageFile = event.target.files[0];
     } else {
       console.log('Image file not found');
+      this.toastr.error("Image file not found");
     }
   }
 
   onSaveCommentClick() {
-    
+    debugger
     console.log(this.currentPostId, this.CommentText);
-    this.blogPostService.AddComment(this.currentPostId, this.CommentText,).subscribe(
+    this.blogPostService.AddComment(this.currentPostId, this.CommentText,this.loginservice.currentUser).subscribe(
       (response: Comment) => {
         console.log(response);
+        this.toastr.success("Comment added successfully");
         this.CommentText = '';
         this.OnPageLoad();
       },
-      (error: any) => { console.log(error); alert(error); });
+      (error: any) => { console.log(error); alert(error); this.toastr.error("Issue while adding comment.");});
       //After submitting commet it shold load component to view new comment
       //this.OnPageLoad();
   }
@@ -135,10 +147,11 @@ export class ViewPostDetailsComponent {
       (response: any) => {
         console.log(response);
         // Reset form fields
+        this.toastr.success("Data uploaded successfully");
         this.post = { title: '', description: '', image: '' };
         this.OnPageLoad();
       },
-      (error: any) => { console.error(error); });
+      (error: any) => { console.error(error); this.toastr.error("There is issue in uploading data.");});
 
     //Here we are calling Pageload function so that newly added posts can be loaded on same page
 

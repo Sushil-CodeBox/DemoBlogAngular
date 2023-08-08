@@ -1,25 +1,81 @@
 <div class="registration-container">
     <div class="registration-content">
       <h3>User Registration</h3>
-      <form>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" class="form-control" id="username" placeholder="Enter username" name="Username" [(ngModel)]="RegisterViewModel1.Username">
+          <!-- <input type="text" class="form-control" id="username" placeholder="Enter username" name="Username" [(ngModel)]="RegisterViewModel1.Username"> -->
+          <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"/>
+          <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+            <div *ngIf="f['username'].errors['required']">Username is required</div>
+            <div *ngIf="f['username'].errors['minlength']">
+              Username must be at least 6 characters
+            </div>
+            <div *ngIf="f['username'].errors['maxlength']">
+              Username must not exceed 20 characters
+            </div>
+          </div>
         </div>
+
         <div class="form-group">
           <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" placeholder="Enter email" name="Email" [(ngModel)]="RegisterViewModel1.Email">
+         <!--  <input type="email" class="form-control" id="email" placeholder="Enter email" name="Email" [(ngModel)]="RegisterViewModel1.Email"> -->
+         <input
+            type="text"
+            formControlName="email"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+          />
+          <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+            <div *ngIf="f['email'].errors['required']">Email is required</div>
+            <div *ngIf="f['email'].errors['email']">Email is invalid</div>
+          </div>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Password" name="Passowrd"  [(ngModel)]="RegisterViewModel1.Password">
+          <!-- <input type="password" class="form-control" id="password" placeholder="Password" name="Passowrd"  [(ngModel)]="RegisterViewModel1.Password"> -->
+          <input
+            type="password"
+            formControlName="password"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+          />
+          <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+            <div *ngIf="f['password'].errors['required']">Password is required</div>
+            <div *ngIf="f['password'].errors['minlength']">
+              Password must be at least 6 characters
+            </div>
+            <div *ngIf="f['password'].errors['maxlength']">
+              Username must not exceed 40 characters
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <label for="confirmPassword">Confirm Password</label>
-          <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+          <!-- <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password"> -->
+          <input
+            type="password"
+            formControlName="confirmPassword"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+          />
+          <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
+            <div *ngIf="f['confirmPassword'].errors['required']">
+              Confirm Password is required
+            </div>
+            <div *ngIf="f['confirmPassword'].errors['matching']">
+              Confirm Password does not match
+            </div>
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary btn-block" (click)="onRegisterClick($event)">Register</button>
-        <button type="submit" routerLink="/login" class="btn btn-primary btn-block">Log In</button>
+        <div class="form-group d-flex flex-wrap justify-content-between align-items-center">
+          <button type="submit" class="btn btn-primary">Register</button>         
+          <button type="button" (click)="onReset()" class="btn btn-warning" style="margin-top: 20px;">
+            Reset
+          </button>
+        </div>
+        <!-- <button type="submit" class="btn btn-primary btn-block" (click)="onRegisterClick($event)">Register</button>
+        <button type="submit" routerLink="/login" class="btn btn-primary btn-block">Log In</button> -->
       </form>
     </div>
   </div>

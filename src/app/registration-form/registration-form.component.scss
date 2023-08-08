@@ -1,8 +1,9 @@
 .registration-container {
-    background-image: url('../../assets/image/bgRegister.jpg'); /* Replace with the actual path to your background image */
+    //background-image: url('../../assets/image/bgRegister.jpg'); /* Replace with the actual path to your background image */
+    background-image: linear-gradient(to left, rgba(0, 210, 255, 0.8) 0%, rgba(58, 123, 213, 0.8) 100%);
     background-size: cover;
     background-position: center;
-    min-height: 100vh;
+    min-height: 100vh;    
     display: flex;
     align-items: center;
     justify-content: center;

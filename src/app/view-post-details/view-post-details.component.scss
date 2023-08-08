@@ -1,6 +1,52 @@
 .content {
-    border: 1px solid #ccc;
+    border: .5px #c5c0c0;
     padding: 10px;
     margin-top: 10px;
     display: block;
+   
 }
+
+.row-bg-default{
+  min-height: 100vh;
+  background-color: #d3d3d3;
+  //background-image: linear-gradient(to left, #00d2ff 0%, #3a7bd5 100%);
+  //background-image: linear-gradient(to left, rgba(164, 226, 240, 0.8) 0%, rgba(106, 148, 207, 0.8) 100%);
+  //background-image: linear-gradient(to left, rgba(171, 204, 204, 0.8) 0%, rgba(163, 184, 214, 0.8) 100%);
+  //background-image: linear-gradient(to left, #00d2ff 0%, #3a7bd5 100%);
+  //animation: gradientAnimation 5s infinite;
+}
+
+
+
+@keyframes gradientAnimation {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 0; }
+}
+.custom-scrollbar-js,
+.custom-scrollbar-css {
+    height: 500px;
+}
+
+
+/* Custom Scrollbar using CSS */
+.custom-scrollbar-css {
+    overflow-y: scroll;
+}
+
+/* scrollbar width */
+.custom-scrollbar-css::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* scrollbar track */
+.custom-scrollbar-css::-webkit-scrollbar-track {
+    background: #eee;
+}
+
+/* scrollbar handle */
+.custom-scrollbar-css::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background-color: #00d2ff;
+    background-image: linear-gradient(to top, #00d2ff 0%, #3a7bd5 100%);
+}
+

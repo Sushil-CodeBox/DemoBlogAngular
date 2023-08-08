@@ -16,11 +16,12 @@ export class BlogPostServiceService {
   constructor(private httpClient: HttpClient,private router: Router) { }
 
   //Passing comment to database based on Post id
-  AddComment(currentpostid: any, comment:string) {
+  AddComment(currentpostid: any, comment:string,username:string) {
       const formData = new FormData();    
     formData.append('PostRefID', currentpostid); 
     formData.append('CommentText', comment);   
-    
+    formData.append('UserID', this.userid); 
+    formData.append('UserName', username); 
     return this.httpClient.post<any>("http://localhost:5056/api/Post/savecomment",formData);
   }
 

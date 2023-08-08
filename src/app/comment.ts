@@ -4,6 +4,8 @@ export class Comment {
     date: any;
     postRefID: number;
     post: any;
+    userid :string;
+    username:string;
 
     constructor() {
         this.id=0
@@ -11,5 +13,7 @@ export class Comment {
         this.commentText='';
         this.date='';
         this.post=null;
+        this.username='';
+        this.userid='';
     }
 }

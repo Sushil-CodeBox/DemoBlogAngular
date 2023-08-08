@@ -5,6 +5,7 @@ import { Observable, map } from 'rxjs';
 import { Login } from './login';
 import { RegisterViewModel } from './register-view-model';
 import { BlogPostServiceService } from './blog-post-service.service';
+import { Form } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class LoginService {
 
   currentUser: any = null;
 
+
   public Login(Login:Login): Observable<any>
   {
     
@@ -26,7 +28,8 @@ export class LoginService {
         if (user)
         {
           debugger;
-          this.currentUser = user.userName;          
+          this.currentUser = user.userName; 
+                 
           sessionStorage.setItem('currentUser', JSON.stringify(user));
           // console.log(user.userName)
           // this.currentUser = user.userName;
@@ -42,13 +45,14 @@ export class LoginService {
     this.currentUser = null;
     this.router.navigateByUrl("/login");
   }
-
-  public Register(signUpViewModel: RegisterViewModel): Observable<any> {
-    
-    return this.httpClient.post<any>("http://localhost:5056/api/authenticate/register", signUpViewModel, { responseType: "json", observe: "response" })
+//signUpViewModel: RegisterViewModel
+  public Register(form:Form): Observable<any> {
+    debugger
+    return this.httpClient.post<any>("http://localhost:5056/api/authenticate/register", form, { responseType: "json", observe: "response" })
       .pipe(map(response => {
         if (response) {
           debugger;
+          console.log(response);
           //this.currentUser = response.body.userName;          
           //sessionStorage[this.currentUser] = JSON.stringify(response);
          // sessionStorage.XSRFRequestToken = response.headers.get("XSRF-REQUEST-TOKEN");

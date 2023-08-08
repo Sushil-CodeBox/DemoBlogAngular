@@ -11,7 +11,9 @@ import { FormsModule } from '@angular/forms';
 import { PostFormModalComponent } from './post-form-modal/post-form-modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtInterceptorService } from './jwt-interceptor.service';
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ToastrModule } from 'ngx-toastr';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,10 @@ import { JwtInterceptorService } from './jwt-interceptor.service';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,  
+    NgxPaginationModule,
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot(), // ToastrModule added
+    ReactiveFormsModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
